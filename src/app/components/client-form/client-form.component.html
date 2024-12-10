@@ -1,0 +1,75 @@
+<div class="container">
+    <h2 class="my-4">Add New Client</h2>
+    <form (ngSubmit)="onSubmit()" #clientForm="ngForm">
+      <div class="form-group">
+        <label for="sharedKey">Shared Key</label>
+        <input
+          type="text"
+          id="sharedKey"
+          name="sharedKey"
+          class="form-control"
+          [(ngModel)]="client.sharedKey"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          [(ngModel)]="client.name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          [(ngModel)]="client.phone"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          [(ngModel)]="client.email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input
+          type="date"
+          id="startDate"
+          name="startDate"
+          class="form-control"
+          [(ngModel)]="client.startDate"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input
+          type="date"
+          id="endDate"
+          name="endDate"
+          class="form-control"
+          [(ngModel)]="client.endDate"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary mt-3" [disabled]="clientForm.invalid">
+        Submit
+      </button>
+    </form>
+  </div>
+  
