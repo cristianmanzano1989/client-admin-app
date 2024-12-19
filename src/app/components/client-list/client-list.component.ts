@@ -107,25 +107,6 @@ export class ClientListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Handles real-time search as user types in the search input.
-   * If search key has content, performs search, otherwise loads all clients.
-   */
-  onSearchInput(): void {
-    if (this.searchKey.trim()) {
-      this.clientService.getClientBySharedKey(this.searchKey).subscribe({
-        next: (response) => {
-          this.dataSource = response ? [response] : [];
-        },
-        error: () => {
-          this.dataSource = [];
-        },
-      });
-    } else {
-      this.loadClients();
-    }
-  }
-
-  /**
    * Navigates to the 'add client' view using Angular's Router.
    * This method triggers a navigation to the '/add-client' route when called.
    */
@@ -140,6 +121,26 @@ export class ClientListComponent implements OnInit, OnDestroy {
   onSearchBlur(): void {
     if (!this.searchKey.trim()) {
       this.loadClients();
+    } else {
+      this.clientService.getClientBySharedKey(this.searchKey).subscribe({
+        next: (response) => {
+          // Si encuentra resultados, actualiza la lista
+          this.dataSource = response ? [response] : [];
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Warning',
+            text:
+              'No clients found for the provided shared key: ' + this.searchKey,
+          });
+          this.loggingService.error(
+            'Error fetching clients by shared key:',
+            err
+          );
+          this.dataSource = [];
+        },
+      });
     }
   }
 }
