@@ -14,6 +14,8 @@
         id="sharedKeySearch"
         class="form-control"
         [(ngModel)]="searchKey"
+        (input)="onSearchInput()"
+        (blur)="onSearchBlur()"
         placeholder="Enter shared key"
       />
       <button class="btn btn-primary" (click)="searchBySharedKey()">Search</button>
